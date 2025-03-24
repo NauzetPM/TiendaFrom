@@ -12,9 +12,24 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 
+from prettyconf import config
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+#
+# 
+# CORS_ALLOWED_ORIGINS = [
+#    "http://localhost:5173",  # Si usas Vite
+#    "http://localhost:8080",  # Si usas Vue CLI
+#    "http://127.0.0.1:8000",  # Si pruebas en el mismo servidor
+#   ]
+
+#CORS_ALLOW_CREDENTIALS = True  # Permitir cookies y autenticación con credenciales
+# 
+# No recomendado en produccion
+#
+CORS_ALLOW_ALL_ORIGINS = True
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -31,29 +46,48 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django_rq',
     'django.contrib.staticfiles',
     'shared.apps.SharedConfig',
-    'products.apps.GamesConfig',
+    'products.apps.ProductsConfig',
     'categories.apps.CategoriesConfig',
     'orders.apps.OrdersConfig',
+    'users.apps.UsersConfig',
+    'colorfield',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    #'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+CSRF_COOKIE_SECURE = False
+
 ROOT_URLCONF = 'main.urls'
+
+
+RQ_QUEUES = {
+    'default': {
+        'HOST': 'localhost',
+        'PORT': 6379,
+        'DB': 0,
+    },
+}
+
+
 
 TEMPLATES = [
     {
@@ -115,6 +149,13 @@ USE_I18N = True
 
 USE_TZ = True
 
+
+EMAIL_HOST = 'smtp-relay.brevo.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = config('default_from_email', default='info@tienda.com')
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/

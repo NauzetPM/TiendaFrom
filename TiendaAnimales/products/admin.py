@@ -5,7 +5,7 @@ from .models import Product, ProductImage
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    pass
+    prepopulated_fields = {"slug": ("name",)} 
 
 
 @admin.register(ProductImage)

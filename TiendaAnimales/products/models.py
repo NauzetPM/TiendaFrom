@@ -16,7 +16,6 @@ class Product(models.Model):
     name = models.TextField(unique=True)
     slug = models.SlugField(unique=True)
     description = models.TextField(blank=True)
-    images = models.ImageField(blank=True, upload_to='covers', default='covers/default.jpg')
     price = models.DecimalField(max_digits=5, decimal_places=2)
     stock = models.PositiveIntegerField()
     category = models.ForeignKey(

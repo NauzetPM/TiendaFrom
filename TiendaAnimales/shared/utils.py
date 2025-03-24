@@ -7,3 +7,6 @@ def custom_404(message):
 
 def custom_403(message):
     return JsonResponse({'error': message}, status=403)
+
+def custom_400(message):
+    return JsonResponse({'error': message}, status=400)

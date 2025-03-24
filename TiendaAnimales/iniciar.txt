@@ -1,0 +1,2 @@
+tener redis instalado(hecho en docker)
+rq windows: python manage.py rqworker --worker-class=custom_worker.WindowsWorker

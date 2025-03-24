@@ -1,0 +1,10 @@
+django
+pillow
+ipython
+django-colorfield
+django-cors-headers
+django-rq==3.0.0
+prettyconf==2.2.1
+reportlab
+xhtml2pdf
+django-jazzmin

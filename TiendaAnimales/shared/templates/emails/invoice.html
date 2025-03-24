@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factura de Compra</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #333;
+        }
+        .details {
+            margin-bottom: 20px;
+        }
+        .details p {
+            margin: 5px 0;
+        }
+        .total {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #d9534f;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Factura de Compra</h2>
+        <div class="details">
+            <p><strong>Cliente:</strong> {{ cliente }}</p>
+            <p><strong>Fecha:</strong> {{ fecha }}</p>
+            <p class="total"><strong>Total:</strong> ${{ total }}</p>
+        </div>
+        <p>Gracias por su compra. Si tiene alguna pregunta, no dude en contactarnos.</p>
+        <div class="footer">
+            <p>&copy; 2025 Tienda de Animales - Todos los derechos reservados</p>
+        </div>
+    </div>
+</body>
+</html>
