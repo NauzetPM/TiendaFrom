@@ -5,10 +5,10 @@
             <p class="text-center mb-4">Ingresa tu nueva contraseña.</p>
             <form @submit.prevent="resetPassword">
                 <div class="mb-3">
-                    <input v-model="password" type="password" class="form-control" placeholder="Nueva contraseña" required>
+                    <input id="input1" v-model="password" type="password" class="form-control" placeholder="Nueva contraseña" required>
                 </div>
                 <div class="mb-3">
-                    <input v-model="confirmPassword" type="password" class="form-control" placeholder="Confirmar contraseña" required>
+                    <input id="input2" v-model="confirmPassword" type="password" class="form-control" placeholder="Confirmar contraseña" required>
                 </div>
                 <button type="submit" class="btn btn-primary text-light w-100 mt-3">Restablecer</button>
             </form>

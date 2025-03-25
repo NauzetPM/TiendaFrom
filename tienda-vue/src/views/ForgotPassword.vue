@@ -7,16 +7,12 @@
                 <input v-model="email" type="email" class="form-control" placeholder="Correo electrónico" required>
                 <button class="btn btn-primary text-light mt-3 w-100">Enviar enlace</button>
             </form>
-            <p v-if="message" class="mt-3 text-success text-center">{{ message }}</p>
+            <p v-if="message" :class="'mt-3 text-' + status + ' text-center'">{{ message }}</p>
         </div>
     </div>
 </template>
 
 <style scoped>
-.full-screen {
-    height: 100vh;
-    display: flex;
-}
 .card {
     width: 100%;
     max-width: 400px;
@@ -30,15 +26,17 @@ import axios from 'axios';
 
 const email = ref('');
 const message = ref('');
+const status = ref('')
 
 const requestPasswordReset = async () => {
     try {
-        const response = await axios.post('http://127.0.0.1:8000/api/auth/password-reset/', { email: email.value });
+        await axios.post('http://127.0.0.1:8000/api/auth/password-reset/', { email: email.value });
         message.value = 'Se ha enviado un enlace a tu correo';
-
-        console.log(response.data)
+        status.value = 'success';
     } catch (error) {
         console.error('Error enviando correo de recuperación:', error.response?.data || error.message);
+        message.value = error.response?.data.error || error.message;
+        status.value = 'danger';
     }
 };
 </script>
