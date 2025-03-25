@@ -43,7 +43,7 @@
                         <router-link :to="'/products/' + product.slug" class="text-decoration-none">
                             <div class="card h-100 shadow-sm bg-primary text-light">
                                 <img :src="product.images.length ? product.images[0].image : '/default-image.jpg'"
-                                    class="card-img-top" :alt="'Imagen de ' + product.name">
+                                    class="m-1" :alt="'Imagen de ' + product.name" loading="lazy">
                                 <div class="card-body text-center">
                                     <h5 class="card-title">{{ product.name }}</h5>
                                     <p class="card-text"><strong>Precio:</strong> {{ product.price }}€</p>

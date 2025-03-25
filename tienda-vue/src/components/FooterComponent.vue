@@ -7,16 +7,16 @@
                         Siguenos
                     </h5>
                     <div class="social-links ">
-                        <a href="https://facebook.com" target="_blank" >
+                        <a title="facebook" href="https://facebook.com" target="_blank" >
                             <i class="bi bi-facebook hover-primary"></i>
                         </a>
-                        <a href="https://twitter.com" target="_blank" >
+                        <a title="twitter" href="https://twitter.com" target="_blank" >
                             <i class="bi bi-twitter hover-primary"></i>
                         </a>
-                        <a href="https://instagram.com" target="_blank">
+                        <a title="instagram" href="https://instagram.com" target="_blank">
                             <i class="bi bi-instagram hover-primary"></i>
                         </a>
-                        <a href="https://linkedin.com" target="_blank">
+                        <a title="linkedin" href="https://linkedin.com" target="_blank">
                             <i class="bi bi-linkedin hover-primary"></i>
                         </a>
                     </div>

@@ -11,13 +11,12 @@
 import NavbarComponent from '@/components/NavbarComponent.vue';
 import FooterComponent from '@/components/FooterComponent.vue';
 import CookieBanner from '@/components/CookieBanner.vue';
-
+/*
 document.addEventListener("DOMContentLoaded", () => {
   document.body.style.cursor = "url('/Paw.cur'), auto";
-  document.querySelectorAll("a").forEach(el => {
-    el.style.cursor = "url('/Paw-click.ani'), pointer";
-  });
 });
-
+*/
 </script>
-<style></style>
+<style>
+
+</style>

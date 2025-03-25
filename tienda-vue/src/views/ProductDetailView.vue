@@ -1,5 +1,5 @@
 <template>
-    <div class="container mt-4">
+    <div class="container mt-4 mb-4">
         <div v-if="product" class="card shadow-lg">
             <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-indicators">

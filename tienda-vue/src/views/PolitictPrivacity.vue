@@ -301,22 +301,22 @@ export default {
     }
   },
   mounted() {
-    if (window.location.hash) {
-      const hash = window.location.hash;
-      const target = document.querySelector(hash);
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
-  },
-  watch: {
-    '$route.hash'(newHash) {
-      const target = document.querySelector(newHash);
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
-  },
+        if (window.location.hash) {
+            const hash = window.location.hash;
+            const target = document.querySelector(hash);
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    },
+    watch: {
+        '$route.hash'(newHash) {
+            const target = document.querySelector(newHash);
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    },
 }
 </script>
 
