@@ -1,37 +1,47 @@
 @import '__variables';
 @import '~bootstrap/scss/bootstrap';
 
-
 @mixin bg-color($color) {
     background-color: $color;
+}
+@mixin color($color) {
+    color: $color;
+}
+
+
+.text-color1 {
+    @include color($color1);
+}
+.text-color2 {
+    @include color($color2);
+}
+.text-color3 {
+    @include color($color3);
+}
+.text-color4 {
+    @include color($color4);
 }
 
 .bg-color1 {
     @include bg-color($color1);
 }
-
 .bg-color2 {
     @include bg-color($color2);
 }
-
 .bg-color3 {
     @include bg-color($color3);
 }
-
 .bg-color4 {
     @include bg-color($color4);
 }
-
 .hover-primary a:hover {
     color: $color1 !important;
     transition: 0.3s ease-in-out;
 }
-
 .hover-primary button:hover {
     color: $color1 !important;
     transition: 0.3s ease-in-out;
 }
-
 .full-screen {
     min-height: 100vh; 
     height: auto;

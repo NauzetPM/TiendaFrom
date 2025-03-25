@@ -10,11 +10,14 @@ import PolitictPrivacity from '@/views/PolitictPrivacity.vue';
 import RegisterView from '@/views/RegisterView.vue';
 import ResetPassword from '@/views/ResetPassword.vue';
 import ForgotPassword from '@/views/ForgotPassword.vue';
+import TermsConditions from '@/views/TermsConditions.vue';
+
 const routes = [
     { path: '/', component: HomeView },
     { path: '/login', component: LoginView },
     { path: '/register', component: RegisterView },
     { path: '/privacidad', component: PolitictPrivacity },
+    { path: '/condiciones', component: TermsConditions },
     { path: '/forgot-password', component: ForgotPassword },
     { path: '/cookies', component: CookiesView },
     { path: '/orders', component: OrderView },
@@ -22,14 +25,10 @@ const routes = [
     { path: '/products', component: ProductListView },
     { path: '/products/:slug', component: ProductDetailView },
     { path: '/reset-password/:uid/:token', component: ResetPassword },
-    
-    
 ];
-
 const router = createRouter({
     history: createWebHistory(),
     routes
 });
-
 export default router;
 

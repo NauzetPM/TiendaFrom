@@ -1,16 +1,13 @@
 from django.db import models
 
-
 class ProductImage(models.Model):
     product = models.ForeignKey('Product', related_name='images', on_delete=models.CASCADE)
     image = models.ImageField(
         blank=True, upload_to='products_images/', default='products_images/default.jpg'
     )
     created_at = models.DateTimeField(auto_now_add=True)
-
     def __str__(self):
         return self.image.url if self.image else 'No image available'
-
 
 class Product(models.Model):
     name = models.TextField(unique=True)
@@ -23,6 +20,5 @@ class Product(models.Model):
     )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
     def __str__(self):
         return f'{self.name}'

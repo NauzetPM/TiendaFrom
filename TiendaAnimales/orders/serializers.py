@@ -1,4 +1,3 @@
-from products.serializers import ProductSerializer
 from shared.serializers import BaseSerializer
 from users.serializers import UsersSerializer
 

@@ -1,6 +1,5 @@
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from django.db import transaction
 from shared.decorators import method_required, token_required
 from shared.utils import custom_403, custom_404 ,custom_400
 from shared.tasks import send_gmail
@@ -19,13 +18,10 @@ from .serializers import OrdersSerializer
 @token_required
 def orders_list(request):
     user = request.user
-    orders = Order.objects.filter(user=user) 
-    
+    orders = Order.objects.filter(user=user)
     if not orders.exists():
         return JsonResponse({'message': 'No orders found'}, status=404)
-
     orders_serialized = OrdersSerializer(orders,request=request).serialize()
-    
     return JsonResponse(orders_serialized, safe=False)
 
 @csrf_exempt
@@ -61,7 +57,6 @@ def order_products(request, pk):
         return custom_404('Order not found')
     if order.user != user:
         return custom_403('User is not the owner of requested order')
-
     products_data = [
         {
             "id": op.product.id,
@@ -71,9 +66,7 @@ def order_products(request, pk):
         }
         for op in order.order_products.all()
     ]
-
     return JsonResponse(products_data, safe=False)
-
 
 @csrf_exempt
 @method_required('POST')
@@ -85,24 +78,19 @@ def order_products_add(request, pk):
     product = request.product
     quantity = request.POST.get('quantity', 1) 
     quantity = int(quantity)
-
     if order.user != user:
         return custom_403('User is not the owner of requested order')
-
     order_product, created = OrderProduct.objects.get_or_create(order=order, product=product)
     if not created:
         order_product.quantity += quantity
     else:
         order_product.quantity = quantity
     order_product.save()
-
     if product.stock < quantity:
         return custom_400('Not enough stock available')
     product.stock -= quantity
     product.save()
-
     return JsonResponse({'num-products-in-order': order.order_products.count()}, safe=False)
-
 
 @csrf_exempt
 @method_required('POST')
@@ -119,7 +107,6 @@ def order_status(request, pk):
     order.save()
     return JsonResponse({'status': order.get_status_display()}, safe=False)
 
-
 @csrf_exempt
 @method_required('POST')
 @validate_pay_data
@@ -127,15 +114,10 @@ def order_status(request, pk):
 @validate_order_pay_exist
 def order_pay(request, pk):
     order = request.order
-
     if order.status == Order.Status.PAID:
         return JsonResponse({'error': 'La orden ya ha sido pagada'}, status=400)
-
-
     order.status = Order.Status.PAID
     order.save()
-
-
     recipient = order.user.email
     subject = "Tu Factura"
     template_name = "emails/invoice.html"
@@ -153,9 +135,7 @@ def order_pay(request, pk):
             for op in order.order_products.all()
         ]
     }
-    
     send_gmail.delay(subject, recipient, template_name, context, "factura.pdf")
-
     return JsonResponse({'status': order.get_status_display(), 'key': order.key}, safe=False)
 
 

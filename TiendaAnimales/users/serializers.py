@@ -1,10 +1,8 @@
 from shared.serializers import BaseSerializer
 
-
 class TokensSerializer(BaseSerializer):
     def __init__(self, to_serialize, *, fields=[], request=None):
         super().__init__(to_serialize, fields=fields, request=request)
-
     def serialize_instance(self, instance) -> dict:
         return {
             'id': instance.pk,
@@ -13,11 +11,9 @@ class TokensSerializer(BaseSerializer):
             'user': instance.user,
         }
 
-
 class UsersSerializer(BaseSerializer):
     def __init__(self, to_serialize, *, fields=[], request=None):
         super().__init__(to_serialize, fields=fields, request=request)
-
     def serialize_instance(self, instance) -> dict:
         return {
             'id': instance.pk,

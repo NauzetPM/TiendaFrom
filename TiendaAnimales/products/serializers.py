@@ -4,7 +4,6 @@ from categories.serializers import CategoriesSerializer
 class ProductSerializer(BaseSerializer):
     def __init__(self, to_serialize, *, fields=[], request=None):
         super().__init__(to_serialize, fields=fields, request=request)
-
     def serialize_instance(self, instance) -> dict:
         return {
             'id': instance.pk,
@@ -21,11 +20,9 @@ class ProductSerializer(BaseSerializer):
             ).serialize(),
         }
 
-
 class ProductImageSerializer(BaseSerializer):
     def __init__(self, to_serialize, *, fields=[], request=None):
         super().__init__(to_serialize, fields=fields, request=request)
-
     def serialize_instance(self, instance) -> dict:
         return {
             'id': instance.pk,

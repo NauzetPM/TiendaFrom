@@ -2,22 +2,40 @@
     <div class="home-page login-container d-flex align-items-center justify-content-center">
         <div class="card p-4 shadow-lg">
             <div class="card-body">
-                <h2 class="text-center mb-4">Iniciar Sesión</h2>
-                <form @submit.prevent="handleLogin">
+                <h2 class="text-center mb-4">
+                    Iniciar Sesión
+                </h2>
+                <form @submit.prevent="handleLogin" autocomplete="on">
                     <div class="mb-3">
-                        <label class="form-label">Usuario</label>
-                        <input v-model="username" type="text" class="form-control" placeholder="Usuario" required />
+                        <label for="username" class="form-label">
+                            Usuario
+                        </label>
+                        <input v-model="username" id="username" type="text" class="form-control" placeholder="Usuario"
+                            required autocomplete="username" aria-describedby="usernameHelp" />
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Contraseña</label>
-                        <input v-model="password" type="password" class="form-control" placeholder="********" required />
+                        <label for="password" class="form-label">
+                            Contraseña
+                        </label>
+                        <input v-model="password" id="password" type="password" class="form-control"
+                            placeholder="********" required autocomplete="current-password"
+                            aria-describedby="passwordHelp" />
                     </div>
-                    <button type="submit" class="btn btn-primary w-100">Ingresar</button>
+                    <button type="submit" class="btn btn-primary w-100">
+                        Ingresar
+                    </button>
+                    <p v-if="message" id="message" :class="'mt-3 text-danger text-center'">
+                        {{ message }}
+                    </p>
                 </form>
                 <div class="text-center mt-3">
-                    <router-link to="/register" class="text-decoration-none">¿No Tienes Cuenta? Create Una</router-link>
+                    <router-link to="/register" class="text-decoration-none" aria-label="Crear una cuenta">
+                        ¿No Tienes Cuenta? Crea Una
+                    </router-link>
                     <br>
-                    <router-link to="/forgot-password" class="text-decoration-none">¿Olvidaste tu contraseña?</router-link>
+                    <router-link to="/forgot-password" class="text-decoration-none" aria-label="Recuperar contraseña">
+                        ¿Olvidaste tu contraseña?
+                    </router-link>
                 </div>
             </div>
         </div>
@@ -33,13 +51,13 @@ const authStore = useAuthStore();
 const router = useRouter();
 const username = ref('');
 const password = ref('');
-
+const message = ref('');
 const handleLogin = async () => {
     try {
         await authStore.loginUser(username.value, password.value);
         router.push('/');
     } catch (error) {
-        alert('Error en el inicio de sesión');
+        message.value ='Error en el inicio de sesión correo o contraseña incorrecto';
     }
 };
 </script>
@@ -53,7 +71,7 @@ const handleLogin = async () => {
     align-items: center;
     justify-content: center;
     text-align: center;
-    color: white; 
+    color: white;
     padding: 20px;
 }
 
@@ -66,5 +84,4 @@ const handleLogin = async () => {
 .form-control {
     border-radius: 8px;
 }
-
 </style>

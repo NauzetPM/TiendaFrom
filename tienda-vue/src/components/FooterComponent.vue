@@ -3,32 +3,62 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
-                    <h5>Siguenos</h5>
+                    <h5>
+                        Siguenos
+                    </h5>
                     <div class="social-links ">
-                        <a href="https://facebook.com" target="_blank" ><i class="bi bi-facebook hover-primary"></i></a>
-                        <a href="https://twitter.com" target="_blank" ><i class="bi bi-twitter hover-primary"></i></a>
-                        <a href="https://instagram.com" target="_blank"><i class="bi bi-instagram hover-primary"></i></a>
-                        <a href="https://linkedin.com" target="_blank"><i class="bi bi-linkedin hover-primary"></i></a>
+                        <a href="https://facebook.com" target="_blank" >
+                            <i class="bi bi-facebook hover-primary"></i>
+                        </a>
+                        <a href="https://twitter.com" target="_blank" >
+                            <i class="bi bi-twitter hover-primary"></i>
+                        </a>
+                        <a href="https://instagram.com" target="_blank">
+                            <i class="bi bi-instagram hover-primary"></i>
+                        </a>
+                        <a href="https://linkedin.com" target="_blank">
+                            <i class="bi bi-linkedin hover-primary"></i>
+                        </a>
                     </div>
                 </div>
-
                 <div class="col-md-4">
                     <h5>Contactanos</h5>
-                    <p><i class="bi bi-envelope"></i> contact@yourstore.com</p>
-                    <p><i class="bi bi-telephone"></i> +1 234 567 890</p>
-                    <p><i class="bi bi-geo-alt"></i> 123 Main Street, City, Country</p>
+                    <p>
+                        <i class="bi bi-envelope"></i>
+                         contact@yourstore.com
+                    </p>
+                    <p>
+                        <i class="bi bi-telephone"></i>
+                         +1 234 567 890
+                        </p>
+                    <p>
+                        <i class="bi bi-geo-alt"></i>
+                         123 Main Street, City, Country
+                        </p>
                 </div>
-
                 <div class="col-md-4">
-                    <h5>Terminos</h5>
+                    <h5>
+                        Terminos
+                    </h5>
                     <ul class="list-unstyled">
-                        <li><router-link to="/privacidad">Política de privacidad</router-link></li>
-                        <li><router-link to="/cookies">Cookies</router-link></li>
-                        <li><router-link to="/condiciones">Terminos y Condiciones</router-link></li>
+                        <li>
+                            <router-link to="/privacidad#nav">
+                                Política de privacidad
+                            </router-link>
+                        </li>
+                        <li>
+                            <router-link to="/cookies#nav">
+                                Cookies
+                            </router-link>
+                        </li>
+                        <li>
+                            <router-link to="/condiciones#nav">
+                                Terminos y Condiciones
+                            </router-link>
+                        </li>
                     </ul>
                 </div>
             </div>
-
             <div class="text-center mt-3">
                 <p>&copy; {{ new Date().getFullYear() }} Your Store. All Rights Reserved.</p>
             </div>

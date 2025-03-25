@@ -2,12 +2,9 @@ import json
 import re
 from datetime import datetime
 from functools import wraps
-
 from django.http import JsonResponse
-
 from products.models import Product
 from orders.models import Order
-
 
 def validate_orders_products_add_data(view_func):
     @wraps(view_func)
@@ -16,14 +13,12 @@ def validate_orders_products_add_data(view_func):
             data = json.loads(request.body)
         except json.JSONDecodeError:
             return JsonResponse({'error': 'Invalid JSON body'}, status=400)
-
         product_slug = data.get('product-slug', None)
         if not product_slug:
             return JsonResponse({'error': 'Missing required fields'}, status=400)
         pk = kwargs.get('pk')
         if not pk:
             return JsonResponse({'error': 'Order ID is missing'}, status=400)
-
         try:
             order = Order.objects.get(id=pk)
             request.order = order
@@ -34,14 +29,10 @@ def validate_orders_products_add_data(view_func):
             request.product = product
         except Product.DoesNotExist:
             return JsonResponse({'error': 'Product not found'}, status=404)
-
         if product.stock == 0:
             return JsonResponse({'error': 'Product out of stock'}, status=400)
-
         return view_func(request, *args, **kwargs)
-
     return _wrapped_view
-
 
 def validate_status_data(view_func):
     @wraps(view_func)
@@ -50,18 +41,14 @@ def validate_status_data(view_func):
             data = json.loads(request.body)
         except json.JSONDecodeError:
             return JsonResponse({'error': 'Invalid JSON body'}, status=400)
-
         status = data.get('status', None)
         if not status:
             return JsonResponse({'error': 'Missing required fields'}, status=400)
         pk = kwargs.get('pk')
         if not pk:
             return JsonResponse({'error': 'Order ID is missing'}, status=400)
-
         return view_func(request, *args, **kwargs)
-
     return _wrapped_view
-
 
 def validate_order_status_exist(view_func):
     @wraps(view_func)
@@ -87,11 +74,8 @@ def validate_order_status_exist(view_func):
                 {'error': 'Orders can only be confirmed/cancelled when initiated'}, status=400
             )
         request.status = status
-
         return view_func(request, *args, **kwargs)
-
     return _wrapped_view
-
 
 def validate_pay_data(view_func):
     @wraps(view_func)
@@ -100,7 +84,6 @@ def validate_pay_data(view_func):
             data = json.loads(request.body)
         except json.JSONDecodeError:
             return JsonResponse({'error': 'Invalid JSON body'}, status=400)
-
         card_number = data.get('card-number', None)
         exp_date = data.get('exp-date', None)
         cvc = data.get('cvc', None)
@@ -110,29 +93,21 @@ def validate_pay_data(view_func):
         request.exp_date = exp_date
         request.cvc = cvc
         card_number_regex = r'^\d{4}-\d{4}-\d{4}-\d{4}$'
-
         exp_date_regex = r'^\d{2}/\d{4}$'
-
         cvc_regex = r'^\d{3}$'
-
         if not re.match(card_number_regex, card_number):
             return JsonResponse({'error': 'Invalid card number'}, status=400)
-
         if not re.match(exp_date_regex, exp_date):
             return JsonResponse({'error': 'Invalid expiration date'}, status=400)
-
         if not re.match(cvc_regex, cvc):
             return JsonResponse({'error': 'Invalid CVC'}, status=400)
-
         exp_month, exp_year = map(int, exp_date.split('/'))
         current_year = datetime.now().year
         current_month = datetime.now().month
         if exp_year < current_year or (exp_year == current_year and exp_month < current_month):
             return JsonResponse({'error': 'Card expired'}, status=400)
         return view_func(request, *args, **kwargs)
-
     return _wrapped_view
-
 
 def validate_order_pay_exist(view_func):
     @wraps(view_func)
@@ -150,5 +125,4 @@ def validate_order_pay_exist(view_func):
         if order.status != Order.Status.CONFIRMED:
             return JsonResponse({'error': 'Orders can only be paid when confirmed'}, status=400)
         return view_func(request, *args, **kwargs)
-
     return _wrapped_view

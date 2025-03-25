@@ -2,43 +2,54 @@
     <div class="register-page d-flex align-items-center justify-content-center">
         <div class="card p-4 shadow-lg">
             <div class="card-body">
-                <h2 class="text-center mb-4">Crear Cuenta</h2>
-                <form @submit.prevent="handleRegister">
+                <h2 class="text-center mb-4">
+                    Crear Cuenta
+                </h2>
+                <form @submit.prevent="handleRegister" autocomplete="on">
                     <div class="mb-3">
-                        <label class="form-label">Nombre de Usuario</label>
-                        <input v-model="username" type="text" class="form-control" placeholder="TuUsuario" required />
+                        <label for="username" class="form-label">
+                            Nombre de Usuario
+                        </label>
+                        <input v-model="username" id="username" type="text" class="form-control" placeholder="TuUsuario" required autocomplete="username" />
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Correo Electrónico</label>
-                        <input v-model="email" type="email" class="form-control" placeholder="tuemail@gmail.com" required />
+                        <label for="email" class="form-label">
+                            Correo Electrónico
+                        </label>
+                        <input v-model="email" id="email" type="email" class="form-control" placeholder="tuemail@gmail.com" required autocomplete="email" />
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Contraseña</label>
-                        <input v-model="password" type="password" class="form-control" placeholder="********" required />
+                        <label for="password" class="form-label">
+                            Contraseña
+                        </label>
+                        <input v-model="password" id="password" type="password" class="form-control" placeholder="********" required autocomplete="new-password" />
                     </div>
-                    <button type="submit" class="btn btn-primary w-100">Registrarse</button>
+                    <button type="submit" class="btn btn-primary w-100">
+                        Registrarse
+                    </button>
                     <p v-if="errorMessage" class="text-danger">{{ errorMessage }}</p>
                 </form>
                 <div class="text-center mt-3">
-                    <router-link to="/login" class="text-decoration-none">¿Ya tienes una cuenta? Inicia sesión</router-link>
+                    <router-link to="/login" class="text-decoration-none" aria-label="Ir a la página de inicio de sesión">
+                        ¿Ya tienes una cuenta? Inicia sesión
+                    </router-link>
                 </div>
             </div>
         </div>
     </div>
 </template>
 
+
 <script setup>
 import { ref } from 'vue';
 import { useAuthStore } from '@/store/authStore';
 import { useRouter } from 'vue-router';
-
 const authStore = useAuthStore();
 const router = useRouter();
 const username = ref('');
 const email = ref('');
 const password = ref('');
 const errorMessage = ref('');
-
 const handleRegister = async () => {
     try {
         await authStore.registerUser(username.value, email.value, password.value);
@@ -61,13 +72,11 @@ const handleRegister = async () => {
     color: white;
     padding: 20px;
 }
-
 .card {
     width: 100%;
     max-width: 400px;
     border-radius: 10px;
 }
-
 .form-control {
     border-radius: 8px;
 }

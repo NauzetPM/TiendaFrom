@@ -298,7 +298,6 @@
 export default {
   data: function () {
     return {
-
     }
   },
   mounted() {
@@ -319,7 +318,6 @@ export default {
     }
   },
 }
-
 </script>
 
 <style scoped>

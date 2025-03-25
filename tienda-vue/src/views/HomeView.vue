@@ -1,8 +1,14 @@
 <template>
     <div class="home-page text-primary">
-        <h1>Bienvenido a nuestra Tienda</h1>
-        <p>Encuentra los mejores productos a los mejores precios.</p>
-        <router-link to="/products" class="btn btn-dark bg-color3 text-primary">Compra Ya</router-link>
+        <h1>
+            Bienvenido a nuestra Tienda
+        </h1>
+        <h3 class="mt-3">
+            Encuentra los mejores productos a los mejores precios.
+        </h3>
+        <router-link to="/products" class="btn btn-dark bg-color3 text-primary mt-3">
+            Compra Ya
+        </router-link>
     </div>
 </template>
 

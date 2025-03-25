@@ -1,21 +1,44 @@
 <template>
   <div class="container mt-4 p-2 full-screen">
-    <h2>Detalles Pedido</h2>
+    <h2>
+      Detalles Pedido
+    </h2>
     <div v-if="order">
-      <p><strong>Identificador:</strong> {{ order.id }}</p>
-      <p><strong>Estado:</strong> {{ order.status }}</p>
-      <p><strong>Total:</strong> {{ order.price }}</p>
-      <h4>Productos:</h4>
+      <p>
+        <strong>
+          Identificador:
+        </strong>
+         {{ order.id }}
+        </p>
+      <p>
+        <strong>
+          Estado:
+        </strong>
+         {{ order.status }}
+        </p>
+      <p>
+        <strong>
+          Total:
+        </strong>
+         {{ order.price }}
+        </p>
+      <h4>
+        Productos:
+      </h4>
       <ul class="list-group">
         <li class="list-group-item" v-for="item in order.products" :key="item.id">
           {{ item.name }} - {{ item.price }}€  x  {{item.quantity}}
         </li>
       </ul>
       <div class="text-center">
-        <button class="btn btn-primary mt-3 text-light" @click="payOrder" v-if="order.status !== 'Paid'">Pagar</button>
+        <button class="btn btn-primary mt-3 text-light" @click="payOrder" v-if="order.status !== 'Paid'">
+          Pagar
+        </button>
       </div>
     </div>
-    <p v-else>Cargando Detalles...</p>
+    <p v-else>
+      Cargando Detalles...
+    </p>
   </div>
 </template>
 
@@ -44,9 +67,7 @@ const fetchOrderDetails = async () => {
     console.error('Error obteniendo detalles:', error);
   }
 };
-
 onMounted(fetchOrderDetails);
-
 const payOrder = async () => {
   try {
     await orderStore.payOrder(order.value.id);
