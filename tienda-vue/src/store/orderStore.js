@@ -11,6 +11,18 @@ export const useOrderStore = defineStore('order', {
     }),
 
     actions: {
+        getGroupedCart() {
+            const groupedCart = {};
+
+            this.cart.forEach(item => {
+                if (!groupedCart[item.slug]) {
+                    groupedCart[item.slug] = { ...item, quantity: 0 };
+                }
+                groupedCart[item.slug].quantity += item.quantity;
+            });
+
+            return Object.values(groupedCart);
+        },
         async loadOrders() {
             const authStore = useAuthStore();
             if (!authStore.token) {

@@ -153,7 +153,7 @@ def order_pay(request, pk):
             for op in order.order_products.all()
         ]
     }
-
+    
     send_gmail.delay(subject, recipient, template_name, context, "factura.pdf")
 
     return JsonResponse({'status': order.get_status_display(), 'key': order.key}, safe=False)

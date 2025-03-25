@@ -1,21 +1,14 @@
 <template>
     <div class="container p-4 full-screen">
-        <h2 class="text-center mb-4">Productos</h2>
-
         <div class="row">
-            <!-- FILTROS -->
             <div class="col-md-3 mb-4">
-                <div class="card shadow-sm p-3">
+                <div class="card shadow-sm p-3 bg-color1 text-light">
                     <div class="dropdown mb-3">
-                        <button class="btn btn-secondary w-100 d-flex align-items-center justify-content-between"
+                        <button class="btn  w-100 d-flex align-items-center justify-content-between bg-primary text-light"
                             type="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-filter"></i> Seleccionar Categoría
                         </button>
-                        <ul class="dropdown-menu w-100 p-2">
-                            <li class="dropdown-item">
-                                <input type="checkbox" v-model="selectAll" @change="toggleAll" />
-                                <label class="ms-2">Todas</label>
-                            </li>
+                        <ul class="dropdown-menu w-100 p-2 bg-primary">
                             <li v-for="category in categories" :key="category.id" class="dropdown-item">
                                 <input type="checkbox" v-model="selectedCategories" :value="category.id" />
                                 <label class="ms-2">{{ category.name }}</label>
@@ -29,7 +22,7 @@
                         <input type="range" v-model="priceRange.max" :min="priceRange.min" :max="maxPrice"
                             class="form-range">
                         <p class="text-center">
-                            ${{ priceRange.min }} - ${{ priceRange.max }}
+                            {{ priceRange.min }}€ - {{ priceRange.max }}€
                         </p>
                     </div>
 
@@ -43,21 +36,20 @@
                 </div>
             </div>
 
-            <!-- PRODUCTOS -->
             <div class="col-md-9">
                 <div class="mb-4">
                     <input v-model="filter" class="form-control" placeholder="Buscar productos" />
                 </div>
 
                 <div class="row">
-                    <div v-for="product in paginatedProducts" :key="product.id" class="col-md-4 mb-4">
+                    <div v-for="product in paginatedProducts" :key="product.id" class="col-md-4 mb-4 ">
                         <router-link :to="'/products/' + product.slug" class="text-decoration-none">
-                            <div class="card h-100 shadow-sm">
+                            <div class="card h-100 shadow-sm bg-primary text-light">
                                 <img :src="product.images.length ? product.images[0].image : '/default-image.jpg'"
                                     class="card-img-top" alt="Product Image">
-                                <div class="card-body text-center">
+                                <div class="card-body text-center ">
                                     <h5 class="card-title">{{ product.name }}</h5>
-                                    <p class="card-text"><strong>Precio:</strong> ${{ product.price }}</p>
+                                    <p class="card-text"><strong>Precio:</strong> {{ product.price }}€</p>
                                 </div>
                             </div>
                         </router-link>
@@ -66,7 +58,6 @@
 
                 <p v-if="filteredProducts.length === 0" class="text-center">No se encontraron productos.</p>
 
-                <!-- PAGINACIÓN -->
                 <nav aria-label="Paginación" class="mt-4">
                     <ul class="pagination justify-content-center">
                         <li class="page-item" :class="{ disabled: currentPage === 1 }">
@@ -101,13 +92,12 @@ const productStore = useProductStore();
 const filter = ref('');
 const selectedCategories = ref([]);
 const categories = ref([]);
-const selectAll = ref(false);
 const priceRange = ref({ min: 0, max: 1000 });
 const maxPrice = ref(1000);
 const sortOrder = ref("asc");
 
 const currentPage = ref(1);
-const itemsPerPage = 18;
+const itemsPerPage =12;
 
 onMounted(async () => {
     await productStore.loadProducts();

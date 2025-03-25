@@ -11,7 +11,6 @@ def send_gmail(subject, recipient, template_name, context, pdf_filename="documen
 
     pdf_file = io.BytesIO()
     pisa_status = pisa.CreatePDF(io.BytesIO(html_content.encode("utf-8")), dest=pdf_file)
-
     if pisa_status.err:
         print("Error al generar el PDF") 
         return
@@ -28,4 +27,16 @@ def send_gmail(subject, recipient, template_name, context, pdf_filename="documen
 
     email.attach(pdf_filename, pdf_file.read(), "application/pdf")
 
+    email.send()
+
+@job
+def send_reset_gmail(recipient,reset_link):
+    subject = "Restablecimiento de contraseña"
+    message = f"Haz clic en el siguiente enlace para restablecer tu contraseña: {reset_link}"
+    email = EmailMessage(
+        subject=subject,
+        body=message,
+        from_email="tienda@gmail.com",
+        to=[recipient],
+    )
     email.send()

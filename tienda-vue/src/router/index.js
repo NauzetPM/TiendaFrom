@@ -8,16 +8,22 @@ import OrderDetails from '@/views/OrderDetails.vue';
 import CookiesView from '@/views/CookiesView.vue';
 import PolitictPrivacity from '@/views/PolitictPrivacity.vue';
 import RegisterView from '@/views/RegisterView.vue';
+import ResetPassword from '@/views/ResetPassword.vue';
+import ForgotPassword from '@/views/ForgotPassword.vue';
 const routes = [
     { path: '/', component: HomeView },
     { path: '/login', component: LoginView },
     { path: '/register', component: RegisterView },
     { path: '/privacidad', component: PolitictPrivacity },
+    { path: '/forgot-password', component: ForgotPassword },
     { path: '/cookies', component: CookiesView },
     { path: '/orders', component: OrderView },
     { path: '/order/:id', component: OrderDetails },
     { path: '/products', component: ProductListView },
-    { path: '/products/:slug', component: ProductDetailView }
+    { path: '/products/:slug', component: ProductDetailView },
+    { path: '/reset-password/:uid/:token', component: ResetPassword },
+    
+    
 ];
 
 const router = createRouter({
@@ -26,3 +32,4 @@ const router = createRouter({
 });
 
 export default router;
+

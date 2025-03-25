@@ -8,7 +8,7 @@
       <h4>Productos:</h4>
       <ul class="list-group">
         <li class="list-group-item" v-for="item in order.products" :key="item.id">
-          {{ item.name }} - ${{ item.price }}  x  {{item.quantity}}
+          {{ item.name }} - {{ item.price }}€  x  {{item.quantity}}
         </li>
       </ul>
       <div class="text-center">

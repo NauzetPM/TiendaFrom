@@ -16,13 +16,15 @@ describe('OrderView.vue', () => {
       cart: [],
       loadOrders: vi.fn(),
       checkout: vi.fn(),
-      payOrder: vi.fn()
+      payOrder: vi.fn(),
+      getGroupedCart: vi.fn() 
     };
     useOrderStore.mockReturnValue(orderStoreMock);
   });
 
   it('Renderiza correctamente cuando hay pedidos', async () => {
     orderStoreMock.orders = [{ id: 1, status: 'Pending' }];
+    orderStoreMock.getGroupedCart.mockReturnValue([]);
 
     const wrapper = shallowMount(OrderView);
     await wrapper.vm.$nextTick();
@@ -34,6 +36,7 @@ describe('OrderView.vue', () => {
 
   it('Muestra mensaje cuando no hay pedidos', async () => {
     orderStoreMock.orders = [];
+    orderStoreMock.getGroupedCart.mockReturnValue([]);
 
     const wrapper = shallowMount(OrderView);
     await wrapper.vm.$nextTick();
@@ -43,6 +46,7 @@ describe('OrderView.vue', () => {
 
   it('Muestra mensaje cuando el carrito está vacío', async () => {
     orderStoreMock.cart = [];
+    orderStoreMock.getGroupedCart.mockReturnValue([]); 
 
     const wrapper = shallowMount(OrderView);
     await wrapper.vm.$nextTick();
@@ -52,6 +56,7 @@ describe('OrderView.vue', () => {
 
   it('Confirma pedido cuando hay productos en el carrito', async () => {
     orderStoreMock.cart = [{ id: 1, name: 'Producto 1', price: 10 }];
+    orderStoreMock.getGroupedCart.mockReturnValue(orderStoreMock.cart); 
 
     const wrapper = shallowMount(OrderView);
     await wrapper.find('button.btn-success').trigger('click');
@@ -61,7 +66,8 @@ describe('OrderView.vue', () => {
 
   it('Ejecuta el pago correctamente', async () => {
     orderStoreMock.orders = [{ id: 1, status: 'Pending' }];
-    vi.spyOn(window, 'prompt').mockImplementation(() => 'test-data'); // Simular input de tarjeta
+    orderStoreMock.getGroupedCart.mockReturnValue([]);
+    vi.spyOn(window, 'prompt').mockImplementation(() => 'test-data');
 
     const wrapper = shallowMount(OrderView);
     await wrapper.vm.$nextTick();
@@ -74,6 +80,6 @@ describe('OrderView.vue', () => {
       cvc: 'test-data'
     });
 
-    window.prompt.mockRestore(); 
+    window.prompt.mockRestore();
   });
 });

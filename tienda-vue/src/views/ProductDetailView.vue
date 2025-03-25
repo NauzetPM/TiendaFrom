@@ -29,16 +29,15 @@
                 <h2 class="card-title">{{ product.name }}</h2>
                 <p class="text-muted">Categoría: {{ product.category.name }}</p>
                 <p class="card-text">{{ product.description }}</p>
-                <h4 class="text-primary">Precio: ${{ product.price }}</h4>
+                <h4 class="text-primary">Precio: {{ product.price }}€</h4>
 
-                <!-- Input para seleccionar cantidad -->
                 <div class="mb-3">
                     <label for="quantity" class="form-label">Cantidad:</label>
                     <input type="number" id="quantity" v-model="quantity" class="form-control" 
                         :min="1" :max="product.stock" />
                 </div>
 
-                <button class="btn btn-success w-100" @click="addToCart">Añadir al carrito</button>
+                <button id="add-to-cart" class="btn w-100 bg-primary text-light" @click="addToCart">Añadir al carrito</button>
 
                 <div v-if="addedToCart" class="alert alert-success mt-3" role="alert">
                     <i class="bi bi-check-circle"></i> {{ quantity }} {{ product.name }} añadido(s) al carrito!
@@ -65,7 +64,7 @@ const productStore = useProductStore();
 const orderStore = useOrderStore();
 const product = ref(null);
 const addedToCart = ref(false);
-const quantity = ref(1); // Estado para la cantidad seleccionada
+const quantity = ref(1);
 
 onMounted(async () => {
     await productStore.loadProducts();

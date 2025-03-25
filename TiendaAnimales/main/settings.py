@@ -149,6 +149,7 @@ USE_I18N = True
 
 USE_TZ = True
 
+PASSWORD_RESET_TIMEOUT = 14400
 
 EMAIL_HOST = 'smtp-relay.brevo.com'
 EMAIL_PORT = 587

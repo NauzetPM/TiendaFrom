@@ -23,14 +23,14 @@
 }
 
 .hover-primary a:hover {
-    color: $primary !important;
+    color: $color1 !important;
     transition: 0.3s ease-in-out;
 }
 .hover-primary button:hover {
-    color: $primary !important;
+    color: $color1 !important;
     transition: 0.3s ease-in-out;
 }
 .full-screen {
     min-height: 100vh; 
-    height: auto; 
+    height: auto;
 }

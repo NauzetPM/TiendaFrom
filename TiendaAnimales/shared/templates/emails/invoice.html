@@ -21,6 +21,7 @@
         }
         h2 {
             color: #333;
+            text-align: center;
         }
         .details {
             margin-bottom: 20px;
@@ -28,10 +29,27 @@
         .details p {
             margin: 5px 0;
         }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
         .total {
             font-size: 1.2em;
             font-weight: bold;
             color: #d9534f;
+            text-align: right;
+            margin-top: 10px;
         }
         .footer {
             margin-top: 20px;
@@ -47,8 +65,28 @@
         <div class="details">
             <p><strong>Cliente:</strong> {{ cliente }}</p>
             <p><strong>Fecha:</strong> {{ fecha }}</p>
-            <p class="total"><strong>Total:</strong> ${{ total }}</p>
         </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio Unitario</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr>
+                    <td>{{ item.nombre }}</td>
+                    <td>{{ item.cantidad }}</td>
+                    <td>{{ item.precio_unitario }}€</td>
+                    <td>{{ item.precio_total }}€</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <p class="total"><strong>Total a Pagar:</strong> {{ total }}€</p>
         <p>Gracias por su compra. Si tiene alguna pregunta, no dude en contactarnos.</p>
         <div class="footer">
             <p>&copy; 2025 Tienda de Animales - Todos los derechos reservados</p>

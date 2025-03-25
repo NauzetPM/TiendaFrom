@@ -17,7 +17,7 @@
                 <div class="text-center mt-3">
                     <router-link to="/register" class="text-decoration-none">¿No Tienes Cuenta? Create Una</router-link>
                     <br>
-                    <a href="#" class="text-decoration-none">¿Olvidaste tu contraseña?</a>
+                    <router-link to="/forgot-password" class="text-decoration-none">¿Olvidaste tu contraseña?</router-link>
                 </div>
             </div>
         </div>

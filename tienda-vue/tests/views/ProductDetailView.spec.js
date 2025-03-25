@@ -52,7 +52,7 @@ describe('ProductDetailView.vue', () => {
     expect(wrapper.find('.card-title').text()).toBe('Producto de prueba');
     expect(wrapper.find('.text-muted').text()).toContain('Categoría: Categoría 1');
     expect(wrapper.find('.card-text').text()).toBe('Descripción del producto');
-    expect(wrapper.find('.text-primary').text()).toBe('Precio: $100');
+    expect(wrapper.find('.text-primary').text()).toBe('Precio: 100€');
   });
 
   it('Muestra imágenes en el carrusel', async () => {
@@ -65,7 +65,7 @@ describe('ProductDetailView.vue', () => {
   it('Muestra el mensaje de alerta al agregar al carrito', async () => {
     authStore.token = 'mock-token';
     await wrapper.find('#quantity').setValue(2);
-    await wrapper.find('button.btn-success').trigger('click');
+    await wrapper.find('#add-to-cart').trigger('click');
 
     expect(orderStore.addToCart).toHaveBeenCalled();
     expect(wrapper.find('.alert-success').exists()).toBe(true);
@@ -73,7 +73,7 @@ describe('ProductDetailView.vue', () => {
 
   it('No permite agregar al carrito si el usuario no está autenticado', async () => {
     authStore.token = null;
-    await wrapper.find('button.btn-success').trigger('click');
+    await wrapper.find('#add-to-cart').trigger('click');
 
     expect(orderStore.addToCart).not.toHaveBeenCalled();
   });

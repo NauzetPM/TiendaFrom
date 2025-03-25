@@ -6,8 +6,8 @@ from .models import Order, OrderProduct
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['pk','status','user',]
 
 @admin.register(OrderProduct)
 class OrderProductmAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['order', 'product','quantity',]

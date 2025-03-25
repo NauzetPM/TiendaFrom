@@ -302,7 +302,6 @@ export default {
     }
   },
   mounted() {
-    // Al montar el componente, hacer scroll al hash si existe
     if (window.location.hash) {
       const hash = window.location.hash;
       const target = document.querySelector(hash);
@@ -312,7 +311,6 @@ export default {
     }
   },
   watch: {
-    // Verificar cambios en el hash para desplazarse automáticamente
     '$route.hash'(newHash) {
       const target = document.querySelector(newHash);
       if (target) {

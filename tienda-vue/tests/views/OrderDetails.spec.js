@@ -60,8 +60,8 @@ describe('OrderDetails.vue', () => {
     expect(wrapper.text()).toContain('Identificador: 1');
     expect(wrapper.text()).toContain('Estado: Pending');
     expect(wrapper.text()).toContain('Total: 100');
-    expect(wrapper.text()).toContain('Producto 1 - $50');
-    expect(wrapper.text()).toContain('Producto 2 - $50');
+    expect(wrapper.text()).toContain('Producto 1 - 50€');
+    expect(wrapper.text()).toContain('Producto 2 - 50€');
   });
 
   it('Llama a payOrder y redirige tras el pago', async () => {
