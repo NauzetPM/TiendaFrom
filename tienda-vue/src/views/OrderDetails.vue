@@ -48,7 +48,9 @@ import { useRoute, useRouter } from 'vue-router';
 import { useOrderStore } from '@/store/orderStore';
 import axios from 'axios';
 import { useAuthStore } from '@/store/authStore';
+import { urlPeticiones } from '@/global.js';
 const route = useRoute();
+const url = urlPeticiones+"/api/orders/";
 const router = useRouter();
 const orderStore = useOrderStore();
 const order = ref(null);
@@ -56,7 +58,7 @@ const authStore = useAuthStore();
 const fetchOrderDetails = async () => {
   const orderId = route.params.id;
   try {
-    const response = await axios.get(`http://127.0.0.1:8000/api/orders/${orderId}/`, {
+    const response = await axios.get(url+`${orderId}/`, {
       headers: {
         Authorization: `Bearer ${authStore.token}`,
         'Content-Type': 'application/json',

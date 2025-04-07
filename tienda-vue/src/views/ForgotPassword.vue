@@ -35,12 +35,14 @@
 <script setup>
 import { ref } from 'vue';
 import axios from 'axios';
+import { urlPeticiones } from '@/global.js';
+const url = urlPeticiones+"/api/auth/password-reset/";
 const email = ref('');
 const message = ref('');
 const status = ref('')
 const requestPasswordReset = async () => {
     try {
-        await axios.post('http://127.0.0.1:8000/api/auth/password-reset/', { email: email.value });
+        await axios.post(url, { email: email.value });
         message.value = 'Se ha enviado un enlace a tu correo';
         status.value = 'success';
     } catch (error) {

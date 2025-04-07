@@ -1,6 +1,7 @@
 import axios from 'axios';
+import { urlPeticiones } from '@/global.js';
 
-const API_URL = 'http://127.0.0.1:8000/api/auth/';
+const API_URL = urlPeticiones+'/api/auth/';
 export const login = async (username, password) => {
     try {
         const response = await axios.post(`${API_URL}login/`, { username, password });

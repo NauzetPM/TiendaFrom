@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia';
 import { useAuthStore } from '@/store/authStore';
 import axios from 'axios';
-
-const ordersUri = "http://127.0.0.1:8000/api/orders/";
+import { urlPeticiones } from '@/global.js';
+const ordersUri = urlPeticiones+"/api/orders/";
 export const useOrderStore = defineStore('order', {
     state: () => ({
         cart: [],

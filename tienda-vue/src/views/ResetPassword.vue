@@ -35,18 +35,20 @@
 import { ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import axios from 'axios';
+import { urlPeticiones } from '@/global.js';
 const route = useRoute();
 const router = useRouter();
 const password = ref('');
 const confirmPassword = ref('');
 const message = ref('');
+
 const resetPassword = async () => {
     if (password.value !== confirmPassword.value) {
         message.value = 'Las contraseñas no coinciden';
         return;
     }
     try {
-        await axios.post(`http://127.0.0.1:8000/api/auth/password-reset-confirm/${route.params.uid}/${route.params.token}/`, {
+        await axios.post(urlPeticiones+`/api/auth/password-reset-confirm/${route.params.uid}/${route.params.token}/`, {
             password: password.value
         });  
         alert('Contraseña restablecida con éxito');
